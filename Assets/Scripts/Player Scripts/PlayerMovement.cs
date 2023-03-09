@@ -1,24 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("movement")]
+    [Header("Movement")]
     public float movementSpeed;
 
     public float groundDrag;
 
+    [Header("Jump")]
+    public float jumpPower;
+    public float jumpCooldown;
+    public float airMultiplier;
+    public int maxJumpCount = 2;
+    public int jumpsRemaining = 0;
+    public float rayDown = 0.02f;
+
+
+    [Header("Key Binds")]
+    public KeyCode jumpKey = KeyCode.Space;
+
     [Header("Ground Checking")]
     public float playerHeight;
     public LayerMask whatIsGround;
-    bool grounded;
+    public bool grounded;
 
     public Transform orientation;
 
     float horizontalInput;
     float verticalInput;
 
+    public TMP_Text _groundInfo;
     Vector3 moveDirection;
 
     Rigidbody rb;
@@ -30,22 +45,34 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
     }
 
+
     private void Update()
     {
         //Sends a ray down to check if the player is grounded or not
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + rayDown, whatIsGround);
+
 
         PlayerInput();
         MaxSpeed();
 
         if (grounded)
+        {
             rb.drag = groundDrag;
+            
+            jumpsRemaining = maxJumpCount;
+            _groundInfo.text = "Grounded";
+        }
         else
+        {
             rb.drag = 0;
+            _groundInfo.text = "Not Grounded";
+        }
+        
     }
 
     private void FixedUpdate()
     {
+        
         MovePlayer();
     }
 
@@ -54,6 +81,14 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetKeyDown(jumpKey) && (jumpsRemaining > 0))
+        {
+            jumpsRemaining -= 1;
+            Jump();
+        }
+
+
     }
 
     //Moves the player based on player input
@@ -62,7 +97,13 @@ public class PlayerMovement : MonoBehaviour
         //Finds the movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        rb.AddForce(moveDirection.normalized * movementSpeed * 10f, ForceMode.Force);
+        // on ground
+        if(grounded)
+            rb.AddForce(moveDirection.normalized * movementSpeed * 10f, ForceMode.Force);
+
+        // in air
+        else if(!grounded)
+            rb.AddForce(moveDirection.normalized * movementSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
     private void MaxSpeed()
@@ -76,4 +117,15 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(limitVelocity.x, rb.velocity.y, limitVelocity.z);
         }
     }
+
+    
+
+    private void Jump()
+    {
+        // reset the y velocity
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
+    }
+
 }

@@ -70,6 +70,11 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    private void Delay()
+    {
+
+    }
+
     private void FixedUpdate()
     {
         
@@ -84,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(jumpKey) && (jumpsRemaining > 0))
         {
+            grounded = false;
             jumpsRemaining -= 1;
             Jump();
         }

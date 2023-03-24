@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     public int maxJumpCount = 2;
     public int jumpsUsed = 0;
     public float rayDown = 0.02f;
+    public float fallMultiplier = 2.5f;
+    public float lowJumpMulitplier = 2f;
     
     [Header("Key Binds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -67,6 +69,16 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            //Sends the player falling down at a certain speed and makes player jump higher if holding jump key
+            if (rb.velocity.y < 0)
+            {
+                rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            }
+            //makes player jump lower if pressed rather then held
+            else if (rb.velocity.y > 0 && !Input.GetKey(jumpKey))
+            {
+                rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMulitplier - 1) * Time.deltaTime;
+            }
             rb.drag = 0;
             _groundInfo.text = "Not Grounded";
         }

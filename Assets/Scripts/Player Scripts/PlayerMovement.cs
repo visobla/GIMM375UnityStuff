@@ -154,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
         //rb.useGravity = !OnSlope();
     }
 
+    //Need to fix freefall velocity resetting at 35 speed
     private void MaxSpeed()
     {
         // Limits speed on slopes
@@ -162,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
             if (rb.velocity.magnitude > movementSpeed)
                 rb.velocity = rb.velocity.normalized * movementSpeed;
         }
+
         // Limits speed on ground or in the air
         else
         {

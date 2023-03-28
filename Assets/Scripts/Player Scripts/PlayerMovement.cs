@@ -86,8 +86,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        
+    { 
         MovePlayer();
     }
 
@@ -138,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
             _groundInfo.text = "Slope";
             //Stops you from bouncing on a slope
             if (rb.velocity.y > 0)
-                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
+                rb.AddForce(Vector3.down * 60f, ForceMode.Force);
         }
 
         // on ground

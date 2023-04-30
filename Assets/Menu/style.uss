@@ -1,0 +1,22 @@
+.ButtonStyle1 {
+    background-color: rgba(25, 113, 255, 0);
+    -unity-background-image-tint-color: rgb(225, 225, 225);
+    align-items: center;
+    width: 80px;
+    height: 30px;
+    position: relative;
+    bottom: 587px;
+    top: 250px;
+    justify-content: flex-start;
+    right: 559px;
+    left: 650px;
+    -unity-text-align: middle-center;
+    scale: 4 4;
+}
+
+.ButtonStyle2 {
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+}

@@ -21,9 +21,12 @@ public class MovingPlatform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Set the fixed timestep for this script to 0.01 seconds
-        Time.fixedDeltaTime = 0.01f;
-        TargetNextWaypoint();
+        if (_waypointPath != null)
+        {
+            // Set the fixed timestep for this script to 0.01 seconds
+            Time.fixedDeltaTime = 0.01f;
+            TargetNextWaypoint();
+        }
     }
 
     //Changed the FixedUpdate Settings in Edit>Project Settings> Time from 0.02 to 0.01

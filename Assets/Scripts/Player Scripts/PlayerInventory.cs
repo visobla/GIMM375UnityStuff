@@ -6,7 +6,7 @@ using TMPro;
 public class PlayerInventory : MonoBehaviour
 {
     public TMP_Text _soulInfo;
-    public int AmountOfCollected { get; private set; }
+    public int AmountOfCollected; //{ get; public set; }
 
     public void SoulsCollected()
     {

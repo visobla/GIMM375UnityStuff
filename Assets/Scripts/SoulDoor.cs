@@ -8,7 +8,7 @@ public class SoulDoor : MonoBehaviour
     public int soulsNeeded;
     public GameObject door;
 
-    void onTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {

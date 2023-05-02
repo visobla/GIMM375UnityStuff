@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 7566300660205686603}
   - component: {fileID: 2421542097648849223}
   - component: {fileID: 3162318080289007013}
-  - component: {fileID: 6320311704399742626}
   - component: {fileID: 6320311704399742627}
+  - component: {fileID: 8957331476037356304}
   m_Layer: 0
   m_Name: pSphere1
   m_TagString: Untagged
@@ -117,20 +117,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6320311704399742626
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105928891746255576}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2540817853737639666, guid: c01ef5f489bacea4abb0615fed662dd7, type: 3}
 --- !u!114 &6320311704399742627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,3 +129,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d915b1e10ba3b458b09e301d909942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &8957331476037356304
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105928891746255576}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.38
+  m_Height: 5.49
+  m_Direction: 1
+  m_Center: {x: -0.27399752, y: 0.135988, z: 0}

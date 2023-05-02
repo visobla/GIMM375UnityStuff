@@ -43,6 +43,9 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +84,15 @@ public class PlayerMovement : MonoBehaviour
             }
             rb.drag = 0;
             _groundInfo.text = "Not Grounded";
+        }
+
+        if (horizontalInput != 0 || verticalInput != 0)
+        {
+            animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            animator.SetBool("IsMoving", false);
         }
 
     }
@@ -125,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
     //Moves the player based on player input
     private void MovePlayer()
     {
+        
         //Finds the movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 

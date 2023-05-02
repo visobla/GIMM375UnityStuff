@@ -45,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
+    private bool isJumping;
+    private bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +67,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded)
         {
+            animator.SetBool("IsGrounded", true);
+            isGrounded = true;
+            animator.SetBool("IsJumping", false);
+            isJumping = false;
+            animator.SetBool("IsFalling", false);
             rb.drag = groundDrag;
 
             //jumpsUsed = maxJumpCount;
@@ -72,6 +79,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            animator.SetBool("IsGrounded", false);
+            isGrounded = false;
+
+            if (isJumping)
+            {
+                animator.SetBool("IsFalling", true);
+            }
             //Sends the player falling down at a certain speed and makes player jump higher if holding jump key
             if (rb.velocity.y < 0)
             {
@@ -115,6 +129,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(jumpKey) && (jumpsUsed < maxJumpCount))
         {
+            animator.SetBool("IsJumping", true);
+            isJumping = true;
             //if(!grounded && jumpsUsed >= maxJumpCount) return;
             //Checks if jumps Used is Equal to 0  then starts the Coroutine
             if (jumpsUsed == 0) StartCoroutine(WaitForLanding());

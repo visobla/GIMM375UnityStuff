@@ -52,8 +52,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource soundSource;
     [SerializeField] private AudioClip jump;
+    [SerializeField] private AudioClip jumpVocal;
     [SerializeField] private AudioClip run;
     [SerializeField] private AudioClip land;
+    [SerializeField] private AudioClip landVocal;
 
     // Start is called before the first frame update
     void Start()
@@ -152,8 +154,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(jumpKey) && (jumpsUsed < maxJumpCount))
         {
-            soundSource.pitch = (Random.Range(0.65f, 2f));
+            soundSource.pitch = (Random.Range(0.95f, 1.05f));
             soundSource.PlayOneShot(jump);
+            soundSource.PlayOneShot(jumpVocal);
             animator.SetBool("IsJumping", true);
             isJumping = true;
             //if(!grounded && jumpsUsed >= maxJumpCount) return;
@@ -171,8 +174,12 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitUntil(() => !grounded);
         //Waits till you have landed again
         yield return new WaitUntil(() => grounded);
+        //Randomize!
         soundSource.pitch = (Random.Range(0.6f, 1.3f));
         soundSource.PlayOneShot(land);
+        //DeRandomize so Ruu's not a chipmunk!
+        soundSource.pitch = 1;
+        soundSource.PlayOneShot(landVocal);
         jumpsUsed = 0;
     }
 

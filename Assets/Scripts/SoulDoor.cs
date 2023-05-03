@@ -7,6 +7,8 @@ public class SoulDoor : MonoBehaviour
     public PlayerInventory _playerInvetory;
     public int soulsNeeded;
     public GameObject door;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip squeak;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -16,6 +18,7 @@ public class SoulDoor : MonoBehaviour
             if(_playerInvetory.AmountOfCollected >= soulsNeeded)
             {
                 Destroy(door);
+                audioSource.PlayOneShot(squeak);
             }
         }
     }

@@ -1,5 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!243 &-7104273540096167592
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Music
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 470b3ecbd8a078e44acf753bd6fba5f8
+  m_Children: []
+  m_Volume: 24acfacd08b226448885eca6676d5ef6
+  m_Pitch: 476b2ad63f8707548b2939107a97d0cb
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -682042757170078493}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &-682042757170078493
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 51d19e0c715011e48bee6805b4b5b462
+  m_EffectName: Attenuation
+  m_MixLevel: 2a9875d6fe283f9498abd8b448c1ea39
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -16,7 +49,11 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters: []
-  m_AudioMixerGroupViews: []
+  m_AudioMixerGroupViews:
+  - guids:
+    - 59f683da68a80624dabf737410659dfe
+    - 470b3ecbd8a078e44acf753bd6fba5f8
+    name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
 --- !u!243 &24300002
@@ -28,7 +65,8 @@ AudioMixerGroupController:
   m_Name: Master
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 59f683da68a80624dabf737410659dfe
-  m_Children: []
+  m_Children:
+  - {fileID: -7104273540096167592}
   m_Volume: 838e21ea666d77741ba243634ef0ee27
   m_Pitch: 2ce3ab7b99811d14fb8b293eaf06bc10
   m_Send: 00000000000000000000000000000000
@@ -61,5 +99,6 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 14e3e8cd6d7f951419ed398ebd0747b3
-  m_FloatValues: {}
+  m_FloatValues:
+    24acfacd08b226448885eca6676d5ef6: -0.08374883
   m_TransitionOverrides: {}

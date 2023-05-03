@@ -48,11 +48,20 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping;
     private bool isGrounded;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource soundSource;
+    [SerializeField] private AudioClip jump;
+    [SerializeField] private AudioClip run;
+    [SerializeField] private AudioClip land;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.Play(0);
     }
 
     private void Update()
@@ -102,13 +111,27 @@ public class PlayerMovement : MonoBehaviour
 
         if (horizontalInput != 0 || verticalInput != 0)
         {
-            animator.SetBool("IsMoving", true);
+            if (grounded && rb.velocity.magnitude > 0.1f)
+            {
+                audioSource.pitch = (Random.Range(0.95f, 1.05f));
+                audioSource.UnPause();
+                animator.SetBool("IsMoving", true);
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.PlayOneShot(run);
+                }
+            }
+            else
+            {
+                audioSource.Pause();
+                animator.SetBool("IsMoving", false);
+            }
         }
         else
         {
+            audioSource.Pause();
             animator.SetBool("IsMoving", false);
         }
-
     }
 
     private void FixedUpdate()
@@ -129,6 +152,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(jumpKey) && (jumpsUsed < maxJumpCount))
         {
+            soundSource.pitch = (Random.Range(0.65f, 2f));
+            soundSource.PlayOneShot(jump);
             animator.SetBool("IsJumping", true);
             isJumping = true;
             //if(!grounded && jumpsUsed >= maxJumpCount) return;
@@ -146,7 +171,8 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitUntil(() => !grounded);
         //Waits till you have landed again
         yield return new WaitUntil(() => grounded);
-
+        soundSource.pitch = (Random.Range(0.6f, 1.3f));
+        soundSource.PlayOneShot(land);
         jumpsUsed = 0;
     }
 
@@ -177,6 +203,7 @@ public class PlayerMovement : MonoBehaviour
         // in air
         else if (!grounded)
         {
+            audioSource.Pause();
             rb.AddForce(moveDirection.normalized * movementSpeed * 10f * airMultiplier, ForceMode.Force);
         }
         //rb.useGravity = !OnSlope();

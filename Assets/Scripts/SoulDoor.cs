@@ -18,7 +18,10 @@ public class SoulDoor : MonoBehaviour
             if(_playerInvetory.AmountOfCollected >= soulsNeeded)
             {
                 Destroy(door);
-                audioSource.PlayOneShot(squeak);
+                if (door != null)
+                {
+                    audioSource.PlayOneShot(squeak);
+                }
             }
         }
     }

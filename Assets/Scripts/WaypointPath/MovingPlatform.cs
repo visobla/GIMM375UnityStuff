@@ -29,7 +29,7 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    
+    //Changed the FixedUpdate Settings in Edit>Project Settings> Time from 0.02 to 0.01
     void FixedUpdate()
     {
         _elapsedTime += Time.deltaTime;

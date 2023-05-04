@@ -14,11 +14,14 @@ public class SoulDoor : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("In Zone");
+            //Debug.Log("In Zone");
             if(_playerInvetory.AmountOfCollected >= soulsNeeded)
             {
                 Destroy(door);
-                audioSource.PlayOneShot(squeak);
+                if (door != null)
+                {
+                    audioSource.PlayOneShot(squeak);
+                }
             }
         }
     }

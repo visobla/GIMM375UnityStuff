@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
-    public TMP_Text _groundInfo;
+    //public TMP_Text _groundInfo;
     Vector3 moveDirection;
 
     Rigidbody rb;
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
             rb.drag = groundDrag;
 
             //jumpsUsed = maxJumpCount;
-            _groundInfo.text = "Grounded";
+            //_groundInfo.text = "Grounded";
         }
         else
         {
@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMulitplier - 1) * Time.deltaTime;
             }
             rb.drag = 0;
-            _groundInfo.text = "Not Grounded";
+            //_groundInfo.text = "Not Grounded";
         }
 
         if (horizontalInput != 0 || verticalInput != 0)
@@ -196,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
             grounded = true;
             rb.AddForce(GetSlopeMoveDirection() * movementSpeed * 20f, ForceMode.Force);
             Debug.Log("Im on a slope");
-            _groundInfo.text = "Slope";
+            //_groundInfo.text = "Slope";
             //Stops you from bouncing on a slope
             if (rb.velocity.y > 0)
                 rb.AddForce(Vector3.down * 60f, ForceMode.Force);
